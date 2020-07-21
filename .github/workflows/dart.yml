@@ -28,7 +28,7 @@ jobs:
         password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Actions job result
         body: Build job of ${{github.repository}} completed successfully!
-        to: elchepegarcia1028@gmail.com
-        from: Luke Skywalker # <user@example.com>
+        to: santiagogarcia7080@gmail.com
+        from: elchepegarcia1028@gmail.com
         content_type: text/html
         attachments: attachments.zip,git.diff,./dist/static/main.js
