@@ -14,9 +14,9 @@ jobs:
       image:  google/dart:latest
 
     steps:
-    - uses: actions/checkout@v2
     - name: flutter-android-sdk
-    - uses: andreujuanc/flutter-android-sdk@v1.0.6
+      uses: andreujuanc/flutter-android-sdk@v1.0.6
+    - uses: actions/checkout@v2
     - name: Install dependencies
       run: pub get
     - name: Run tests
