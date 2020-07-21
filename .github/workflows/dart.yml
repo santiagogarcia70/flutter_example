@@ -33,7 +33,7 @@ jobs:
         content_type: text/html
         #attachments: flutter_example/.github/workflows/dart.yml
     - name: flutter doctor sad checkout
-      run: flutter doctor
+      run: "flutter doctor"
     - name: print god
       run: echo "muy bien perro"
     
