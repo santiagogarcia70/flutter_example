@@ -23,12 +23,12 @@ jobs:
       uses: dawidd6/action-send-mail@v2
       with:
         server_address: smtp.gmail.com
-        server_port: 465
+        server_port: 587
         username: ${{secrets.MAIL_USERNAME}}
         password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Actions job result
         body: Build job of ${{github.repository}} completed successfully!
-        to: santiagogarcia7080@gmail.com
-        from: elchepegarcia1028@gmail.com
+        to: correopruebas7080@gmail.com
+        from: santiagogarcia7080@gmail.com
         content_type: text/html
         attachments: attachments.zip,git.diff,./dist/static/main.js
