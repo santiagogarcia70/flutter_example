@@ -31,4 +31,4 @@ jobs:
         to: correopruebas7080@gmail.com
         from: santiagogarcia7080@gmail.com
         content_type: text/html
-        attachments: attachments.zip,git.diff,./dist/static/main.js
+        #attachments: attachments.zip,git.diff,./dist/static/main.js
