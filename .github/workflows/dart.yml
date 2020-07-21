@@ -31,7 +31,7 @@ jobs:
         to: correopruebas7080@gmail.com
         from: santiagogarcia7080@gmail.com
         content_type: text/html
-        attachments: flutter_example/.github/workflows/dart.yml
+        #attachments: flutter_example/.github/workflows/dart.yml
     - name: flutter doctor sad checkout
       run: flutter doctor
     - name: print god
