@@ -21,9 +21,6 @@ jobs:
             - uses: subosito/flutter-action@v1
               with:
                   flutter-version: '1.9.1+hotfix.6'
-            - name: dependencias  
             - run: flutter pub get
-            - name: test
             - run: flutter test
-            - name: test
             - run: flutter build  
