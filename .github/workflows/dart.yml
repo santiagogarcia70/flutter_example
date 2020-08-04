@@ -1,7 +1,7 @@
 name: GitHubActionsFlutter
 on: push
 jobs: 
-    example:
+    on-push:
         runs-on: ubuntu-latest
         env:
           REPOSITORY_URL: https://github.com/santiagogarcia70/flutter_example
