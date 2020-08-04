@@ -28,7 +28,7 @@ jobs:
             - name: test
             - name: código estatico
               #id: analisis_estatico
-              uses: sonarsource/sonarcloud-github-action@master
+            - uses: sonarsource/sonarcloud-github-action@master
               env:
                 GITHUB_TOKEN: ${{ secrets.TOKEN }}
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
