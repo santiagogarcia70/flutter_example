@@ -1,37 +1,65 @@
-name: Dart CI
-#
 on:
   push:
-    branches:
-    - master
+    tags: 
+      - v*
+name: GitHubActionsFlutter
+jobs: 
+    run_push:
+        runs-on: ubuntu-latest
+        env:
+          REPOSITORY_URL: https://github.com/santiagogarcia70/flutter_example
+          IMAGE_NAME: ${{ github.repository }}/alerta-cli
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        steps:
+            - uses: act10ns/slack@v1
+              with:
+                status: starting
+                channel: '#githubactionsexample'
+              if: always()           
+            - uses: actions/checkout@v1
+            - uses: actions/setup-java@v1
+              with:
+                java-version: '12.x'
+            - uses: actions/subosito/flutter-action@v1
+              with:
+                flutter-version: '1.17.0'
+            - run: flutter pub get
+            - run: flutter build apk -t lib/main.dart --split-per-abi
+            - name: Relase apk
+              uses: ncipollo/release-action@v1
+              with:
+                artifacts: "build/app/outputs/apk/release/*.apk"
+                token: ${{secrets.TOKEN}}
+            
+            #- name: Analisis de codigo estatico
+              #id: Analisis_Codigo_Estatico
+              #uses: sonarsource/sonarcloud-github-action@master
+              #env:
+                #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-jobs:
-  build:
+            #- name: Hacer build
+              #run: npm run build
 
-    runs-on: ubuntu-latest
+            #- name: Creación de artefacto
+              #id: Generar_Artefacto
+              #uses: actions/upload-artifact@v2
+              #with:
+                #name: GithubActions
+                #path: dist
 
-    container:
-      image:  google/dart:latest
+            #- name: Dockerizacion
+              #id: Dockerizacion
+              #uses: docker/build-push-action@v1
+              #with:
+                #username: ${{ secrets.USER_DOCKER }}
+                #password: ${{ secrets.PASSWORD_DOCKER }}
+                #repository: ${{ secrets.REPOSITORY_DOCKER }}
+                #tags: latest
 
-    steps:
-    - name: flutter-android-sdk
-      uses: andreujuanc/flutter-android-sdk@v1.0.6
-    - uses: actions/checkout@v2
-    - name: flutter-cli
-      uses: steebchen/flutter@v1.1.0  
-    - name: Send mail
-      uses: dawidd6/action-send-mail@v2
-      with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: Github Actions job result
-        body: Build job of ${{github.repository}} completed successfully!
-        to: correopruebas7080@gmail.com
-        from: santiagogarcia7080@gmail.com
-        content_type: text/html
-        #attachments: flutter_example/.github/workflows/dart.yml
-    - name: print god
-      run: echo "muy bien perro"
-    
+            - uses: act10ns/slack@v1
+              with:
+                status: ${{ job.status }}
+                steps: ${{ toJson(steps) }}
+                channel: '#githubactionsexample'
+              if: always()
