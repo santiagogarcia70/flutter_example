@@ -1,8 +1,5 @@
 name: GitHubActionsFlutter
-on:
-  push:
-    tags: 
-      - v*
+on: push
 jobs: 
     run_push:
         runs-on: ubuntu-latest
