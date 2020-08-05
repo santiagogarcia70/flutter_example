@@ -7,7 +7,7 @@ jobs:
           REPOSITORY_URL: https://github.com/santiagogarcia70/flutter_example
           IMAGE_NAME: ${{ github.repository }}/alerta-cli
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          JAVA_HOME: ${{/usr/java/jdk1.7.0_05}}
+      
         steps:
             - uses: act10ns/slack@v1
               with:
