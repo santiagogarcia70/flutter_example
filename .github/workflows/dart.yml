@@ -25,12 +25,12 @@ jobs:
             - run: flutter pub get
               
             - run: flutter test
-              
-            - name: SonarQube Scan
-              uses: kitabisa/sonarqube-action@master
-              with:
-                  host: ${{ secrets.SONARQUBE_HOST }}
-                  login: ${{ secrets.SONARQUBE_TOKEN }}
-          
+
             - run: flutter build
+          
+            - name: SonarCloud Scan
+              uses: sonarsource/sonarcloud-github-action@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           
