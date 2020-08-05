@@ -7,6 +7,7 @@ jobs:
           REPOSITORY_URL: https://github.com/santiagogarcia70/flutter_example
           IMAGE_NAME: ${{ github.repository }}/alerta-cli
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JAVA_HOME: ${{/usr/java/jdk1.7.0_05}}
         steps:
             - uses: act10ns/slack@v1
               with:
@@ -22,11 +23,14 @@ jobs:
               with:
                   flutter-version: '1.9.1+hotfix.6'
             - run: flutter pub get
+              
             - run: flutter test
-            - run: flutter build
-          
+              
             - name: SonarQube Scan
               uses: kitabisa/sonarqube-action@master
               with:
                   host: ${{ secrets.SONARQUBE_HOST }}
                   login: ${{ secrets.SONARQUBE_TOKEN }}
+          
+            - run: flutter build
+          
