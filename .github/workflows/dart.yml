@@ -40,7 +40,7 @@ jobs:
                   file: coverage/lcov.info
                   
             - name: Generación de APK
-              run: flutter build apk --no-shrink
+              run: flutter build
               
             - name: Upload generated apk to the artifacts.
               uses: actions/upload-artifact@v1
