@@ -29,6 +29,9 @@ jobs:
             
             - name: Test sobre la app
               run: flutter test --coverage
+            
+            - name: static analysis code
+              run: flutter  analyze
               
             - name: Cargar coverage a Codecov
               uses: codecov/codecov-action@v1
