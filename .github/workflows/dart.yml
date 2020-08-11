@@ -16,21 +16,23 @@ jobs:
               if: always()
               
             - uses: actions/checkout@v1
-            - uses: actions/setup-java@v1
-              with:
-                  java-version: '12.x'             
-            - uses: subosito/flutter-action@v1
-              with:
-                  flutter-version: '1.9.1+hotfix.6'
-            - run: flutter pub get
               
-            - run: flutter test
-
-            - run: flutter build
+            - name: install dependencies
+              uses: steebchen/flutter@v1.1.0
+              with:
+                  arg: pub get
+                  
+            - name: run tests
+              uses: steebchen/flutter@v1.1.0
+              with:
+                  arg: test
+                  
+            - name: build apk
+              uses: steebchen/flutter@v1.1.0
+              with:
+                  arg: build apk --release 
           
-            - name: SonarCloud Scan
-              uses: sonarsource/sonarcloud-github-action@master
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              
+
+          
           
