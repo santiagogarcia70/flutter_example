@@ -39,8 +39,10 @@ jobs:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   file: coverage/lcov.info
                   
+            - name: Flutter clean
+              run: flutter clean
             - name: Generación de APK
-              run: flutter build
+              run: flutter build apk
               
             - name: Upload generated apk to the artifacts.
               uses: actions/upload-artifact@v1
