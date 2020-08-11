@@ -17,22 +17,21 @@ jobs:
               
             - uses: actions/checkout@v1
               
-            - name: install dependencies
-              uses: steebchen/flutter@v1.1.0
+            - uses: actions/setup-java@v1
               with:
-                  arg: pub get
-                  
-            - name: run tests
-              uses: steebchen/flutter@v1.1.0
+                  java-version: '12.x'             
+            - uses: subosito/flutter-action@v1
               with:
-                  arg: test
-                  
-            - name: build apk
-              uses: steebchen/flutter@v1.1.0
-              with:
-                  arg: build apk --release 
+                  flutter-version: '1.9.1+hotfix.6'
           
+            - name: Instalación de dependencias
+              run: flutter pub get
+            
+            - name: Test sobre la app
+              run: flutter test --coverage
               
-
-          
-          
+            - name: Cargar coverage a Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  file: coverage/lcov.info
