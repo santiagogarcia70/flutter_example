@@ -30,17 +30,21 @@ jobs:
             - name: Test sobre la app
               run: flutter test --coverage
             
-            - name: static analysis code
+            - name: Analisis de código estatico
               run: flutter  analyze
-              
-            - name: SonarCloud Scan
-              uses: sonarsource/sonarcloud-github-action@master
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
                 
             - name: Cargar coverage a Codecov
               uses: codecov/codecov-action@v1
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   file: coverage/lcov.info
+                  
+            - name: Generación de APK
+              run: flutter build apk
+              
+            - name: Upload generated apk to the artifacts.
+              uses: actions/upload-artifact@v1
+              with:
+                  name: release-apk
+                  path: build/app/outputs/apk/release/app-release.apk
+              
