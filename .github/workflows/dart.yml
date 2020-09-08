@@ -38,4 +38,6 @@ jobs:
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   file: coverage/lcov.info
+            - name: Flutter Clean
+              run: flutter clean
               
